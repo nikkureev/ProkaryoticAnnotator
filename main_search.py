@@ -3,20 +3,21 @@ import argparse
 import os
 
 
-# parser = argparse.ArgumentParser()
-# parser.add_argument('-in_gff', '--input_gff_file', help='input gff file (annotation)')
-# parser.add_argument('-in_fasta', '--input_fasta_file', help='input fasta file')
-# parser.add_argument('-out', '--output_file', help='output directory')
-# parser.add_argument('-wd', '--working_directory',
-#                     help='set working directory (without "/" at the end), if None current directory will be used')
-#
-# args = parser.parse_args()
-# input_fasta_file = args.input
-# output_file = args.output_file
-# input_error, save_index_file, save_contig_file, save_logging_file = False, False, False, False
-# working_directory = os.path.abspath(os.curdir)
-# if args.working_directory:
-#     working_directory = args.working_directory
+parser = argparse.ArgumentParser()
+parser.add_argument('-in_gff', '--input_gff_file', help='input gff file (annotation)')
+parser.add_argument('-in_fasta', '--input_fasta_file', help='input fasta file')
+parser.add_argument('-out', '--output_file', help='output directory')
+parser.add_argument('-wd', '--working_directory',
+                    help='set working directory (without "/" at the end), if None current directory will be used')
+
+args = parser.parse_args()
+input_gff = args.input_gff_file
+input_fasta = args.input_fasta_file
+prom_term_output_file = args.output_file
+output_file = args.output_file
+working_directory = os.path.abspath(os.curdir)
+if args.working_directory:
+    working_directory = args.working_directory
 
 
 def main(input_gff, out_gff, input_fasta, inter_gene_file, prom_term_output_file):
@@ -32,9 +33,13 @@ def main(input_gff, out_gff, input_fasta, inter_gene_file, prom_term_output_file
 
 
 if __name__ == '__main__':
-    main('C:/AGlab/PROKKA_09172020.gff', 'C:/AGlab/Genes.txt', 'C:/AGlab/NC_000913.fna', 'C:/AGlab/inter_genes.txt',
-         'C:/AGlab/out.txt')
+    main(input_gff=input_gff,
+         out_gff=working_directory + 'genes.txt',
+         input_fasta=input_fasta,
+         inter_gene_file=working_directory + 'inter_genes.txt',
+         prom_term_output_file=prom_term_output_file)
 
 
 # files
-# 'C:/AGlab/Genes.txt', 'C:/AGlab/NC_000913.fna', 'C:/AGlab/inter_genes.txt'
+# 'C:/AGlab/PROKKA_09172020.gff', 'C:/AGlab/Genes.txt', 'C:/AGlab/NC_000913.fna', 'C:/AGlab/inter_genes.txt',
+#          'C:/AGlab/out.txt'
